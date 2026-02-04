@@ -7,144 +7,55 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600&display=swap');
-
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, #1a1a2e 0%, #050505 100%);
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            border-radius: 25px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 85%;
-            max-width: 380px;
-            box-shadow: 0 15px 45px rgba(255, 45, 85, 0.2);
-            position: relative;
-        }
-
-        h1 { font-family: 'Dancing Script', cursive; color: #ff2d55; font-size: 30px; margin-bottom: 10px; }
-        
-        /* Message Box */
-        #noMsg { 
-            color: #ffccd5; 
-            font-size: 15px; 
-            height: 25px; 
-            margin-bottom: 15px; 
-            font-weight: bold;
-        }
-
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #1a1a2e 0%, #050505 100%); font-family: 'Montserrat', sans-serif; color: white; overflow: hidden; cursor: pointer; }
+        .container { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 30px; border-radius: 25px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); width: 85%; max-width: 380px; box-shadow: 0 15px 45px rgba(255, 45, 85, 0.2); position: relative; }
+        h1 { font-family: 'Dancing Script', cursive; color: #ff2d55; font-size: 30px; }
+        #noMsg { color: #ffccd5; font-size: 15px; height: 25px; margin-bottom: 15px; font-weight: bold; }
         .media img { width: 160px; border-radius: 15px; margin-bottom: 15px; }
-
-        .btn-box { 
-            margin-top: 20px; 
-            display: flex; 
-            justify-content: center; 
-            gap: 20px; 
-            height: 60px; 
-        }
-
-        button { 
-            padding: 12px 28px; 
-            font-size: 16px; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: 0.1s;
-        }
-
-        #yesBtn { background: #ff2d55; color: white; z-index: 10; }
-
-        /* No Button - Crucial Styling */
-        #noBtn { 
-            background: white; 
-            color: #ff2d55; 
-            position: absolute; 
-            left: 55%; 
-            z-index: 999;
-        }
-
+        .btn-box { margin-top: 20px; display: flex; justify-content: center; gap: 20px; height: 60px; }
+        button { padding: 12px 28px; font-size: 16px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        #yesBtn { background: #ff2d55; color: white; }
+        #noBtn { background: white; color: #ff2d55; position: absolute; left: 55%; z-index: 999; }
         .hidden { display: none; }
         .shayari { font-family: 'Dancing Script', cursive; font-size: 22px; color: #ffccd5; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
         .footer { margin-top: 20px; font-size: 10px; color: #ff2d55; letter-spacing: 2px; font-weight: bold; }
     </style>
 </head>
 <body onclick="playMusic()">
-
     <audio id="bgMusic" loop>
         <source src="https://www.mboxdrive.com/Satranga%20Instrumental.mp3" type="audio/mpeg">
     </audio>
-
     <div class="container" id="mainBox">
-        <div class="media">
-            <img src="https://media.tenor.com/On7tT9C_hPUAAAAi/peach-goma.gif" alt="Cute">
-        </div>
+        <div class="media"><img src="https://media.tenor.com/On7tT9C_hPUAAAAi/peach-goma.gif"></div>
         <h1>Will you be my Valentine? ❤️</h1>
-        
         <div id="noMsg">Try to say No! 😉</div>
-
         <div class="btn-box">
             <button id="yesBtn" onclick="celebrate()">YES</button>
             <button id="noBtn" onmouseover="dodge()" onclick="dodge()">NO</button>
         </div>
         <div class="footer">MAKE BY MEHUL DESAI</div>
     </div>
-
     <div class="container hidden" id="successBox">
-        <div class="media">
-            <img src="https://media.tenor.com/vHqY76K63mUAAAAi/milk-and-mocha-hug.gif" alt="Hug">
-        </div>
+        <div class="media"><img src="https://media.tenor.com/vHqY76K63mUAAAAi/milk-and-mocha-hug.gif"></div>
         <h1>I Knew It! ❤️</h1>
-        <div class="shayari">
-            "Tari aankho ma mane maru aakhu jagat dekhay chhe,<br>
-            Tari sathe ni darek pal mane hamesha yaad rahay chhe."
-        </div>
+        <div class="shayari">"Tari aankho ma mane maru aakhu jagat dekhay chhe,<br>Tari sathe ni darek pal mane hamesha yaad rahay chhe."</div>
         <div class="footer">MAKE BY MEHUL DESAI</div>
     </div>
-
     <script>
-        const msgs = [
-            "Plzz haa padi do! 🥺", 
-            "Vichari lo ek vaar! 🧐", 
-            "Mane khabar chhe tame haa j padsho! 😉", 
-            "Evu na karo yaar! 😭",
-            "No button click nahi thai! 😂"
-        ];
+        const msgs = ["Plzz haa padi do! 🥺", "Vichari lo ek vaar! 🧐", "Mane khabar chhe tame haa j padsho! 😉", "Evu na karo yaar! 😭"];
         let i = 0;
-
-        function playMusic() {
-            document.getElementById('bgMusic').play();
-        }
-
+        function playMusic() { document.getElementById('bgMusic').play(); }
         function dodge() {
             const btn = document.getElementById('noBtn');
             const msgBox = document.getElementById('noMsg');
-            
-            // Random movement within screen
             const maxX = window.innerWidth - btn.offsetWidth - 50;
             const maxY = window.innerHeight - btn.offsetHeight - 50;
-            
             btn.style.position = 'fixed';
             btn.style.left = Math.random() * maxX + 'px';
             btn.style.top = Math.random() * maxY + 'px';
-
-            // Change Message
             msgBox.innerText = msgs[i];
             i = (i + 1) % msgs.length;
         }
-
         function celebrate() {
             document.getElementById('mainBox').classList.add('hidden');
             document.getElementById('successBox').classList.remove('hidden');
